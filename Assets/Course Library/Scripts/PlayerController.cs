@@ -23,15 +23,14 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
         forwardInput = Input.GetAxis("Vertical");
-
         playerRb.AddForce(focalPoint.transform.forward * speed * forwardInput);
+        powerupIndicator.transform.position = transform.position + new Vector3(0, -0.5f, 0);
     }
 
     private void OnTriggerEnter(Collider other)
     {
         if(other.CompareTag("Powerup"))
         {
-            powerupIndicator.transform.position = transform.position + new Vector3(0, -0.5f, 0);
             hasPowerup = true;
             Destroy(other.gameObject);
             StartCoroutine(PowerupCountdownRoutine());
