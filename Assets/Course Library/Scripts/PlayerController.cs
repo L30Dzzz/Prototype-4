@@ -9,6 +9,7 @@ public class PlayerController : MonoBehaviour
     private float forwardInput;
     private float powerupStrength = 15.0f;
     public float speed = 5.0f;
+
     public bool hasPowerup;
     public GameObject powerupIndicator;
 
@@ -33,7 +34,6 @@ public class PlayerController : MonoBehaviour
         {
             hasPowerup = true;
             Destroy(other.gameObject);
-            StartCoroutine(PowerupCountdownRoutine());
             powerupIndicator.gameObject.SetActive(true);
         }
     }
@@ -48,12 +48,5 @@ public class PlayerController : MonoBehaviour
             Debug.Log("Collided with " + collision.gameObject.name + "with powerup set to " + hasPowerup);
             enemyRigidbody.AddForce(awayFromPlayer * powerupStrength, ForceMode.Impulse);
         }
-    }
-
-    IEnumerator PowerupCountdownRoutine()
-    {
-        powerupIndicator.gameObject.SetActive(false);
-        yield return new WaitForSeconds(7);
-        hasPowerup = false;
     }
 }
