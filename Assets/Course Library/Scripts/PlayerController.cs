@@ -11,7 +11,11 @@ public class PlayerController : MonoBehaviour
     public float speed = 5.0f;
 
     public bool hasPowerup;
+    public bool hasRocketPowerup;
     public GameObject powerupIndicator;
+
+    public GameObject rocketPrefab;
+    GameObject temporaryRocket;
 
     // Start is called before the first frame update
     void Start()
@@ -26,6 +30,11 @@ public class PlayerController : MonoBehaviour
         forwardInput = Input.GetAxis("Vertical");
         playerRb.AddForce(focalPoint.transform.forward * speed * forwardInput);
         powerupIndicator.transform.position = transform.position + new Vector3(0, -0.5f, 0);
+
+        if (hasRocketPowerup == true)
+        {
+            var enemies = GameObject.FindGameObjectsWithTag("Enemy");
+        }
     }
 
     private void OnTriggerEnter(Collider other)
@@ -33,6 +42,12 @@ public class PlayerController : MonoBehaviour
         if(other.CompareTag("Powerup"))
         {
             hasPowerup = true;
+            Destroy(other.gameObject);
+            powerupIndicator.gameObject.SetActive(true);
+        }
+        if(other.CompareTag("RocketPowerup"))
+        {
+            hasRocketPowerup = true;
             Destroy(other.gameObject);
             powerupIndicator.gameObject.SetActive(true);
         }
