@@ -34,6 +34,11 @@ public class PlayerController : MonoBehaviour
         if (hasRocketPowerup == true)
         {
             var enemies = GameObject.FindGameObjectsWithTag("Enemy");
+            for(int i = 0; i < enemies.Length; i++)
+            {
+                temporaryRocket = Instantiate(rocketPrefab, transform.position + Vector3.up, Quaternion.identity);
+                temporaryRocket.GetComponent<Rocket>().LaunchRockets(enemies[i].transform);
+            }
         }
     }
 

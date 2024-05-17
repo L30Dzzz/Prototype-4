@@ -25,11 +25,14 @@ public class Rocket : MonoBehaviour
         }
     }
 
+    // Lanunches rocket
     public void LaunchRockets(Transform enemyPos)
     {  
         enemy = enemyPos;
         Destroy(gameObject, 5);
     }
+
+    // Destroys rocket and enemy
     void OnCollisionEnter(Collision other)
     {
         if(other.gameObject.CompareTag("Enemy"))
